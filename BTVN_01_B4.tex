@@ -116,9 +116,10 @@ d & #4 & $\bigcirc$ & $\bigcirc$ \\[2pt]\hline
   \draw[thin] (1.25,0) -- (1.25,4.3);
   \draw[thin] (0,0.7) -- (15,0.7);
   \draw[thin] (0,1.35) -- (15,1.35);
+  % Vạch đôi chỉ bắt đầu dưới hàng giá trị x, tránh đè lên nhãn -1, 0, 2.
   \foreach \xx in {4.4,7.4,10.55}{
-    \draw[thin] (\xx-0.04,0) -- (\xx-0.04,4.3);
-    \draw[thin] (\xx+0.04,0) -- (\xx+0.04,4.3);
+    \draw[thin] (\xx-0.04,0.7) -- (\xx-0.04,4.3);
+    \draw[thin] (\xx+0.04,0.7) -- (\xx+0.04,4.3);
   }
   \node at (0.62,0.34) {$x$};
   \node at (0.62,1.04) {$y'$};
