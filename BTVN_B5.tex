@@ -62,11 +62,11 @@
 \newcommand{\parttwo}[2]{\par\addvspace{4pt}\textbf{Phần II. Câu trắc nghiệm đúng sai.} Thí sinh trả lời từ câu #1 đến câu #2, trong mỗi ý a), b), c), d) chọn đúng hoặc sai.\par}
 \newcommand{\partthree}[2]{\par\addvspace{4pt}\textbf{Phần III. Câu trắc nghiệm trả lời ngắn.} Thí sinh trả lời từ câu #1 đến câu #2.\par}
 \newcommand{\finishExam}{\par\vspace{3pt}{\centering\textbf{\textcolor{sectionpurple}{--- Hết ---}}\par}}
-% Hinh ve la minh hoa do thi so, dung nhan tren nguon va cac diem dac biet.
-% Truc va cac duong cong la vector TikZ, khong co tep anh ngoai.
+% Hinh ve duoc chuan hoa theo do thi vector goc PDF (TDMXX10) va doi chieu hinh raster goc (TDMXX09, TDMXX11).
+% Hinh TikZ doc lap, khong can tai tep hinh ben ngoai.
 \newcommand{\figbox}[1]{%
 \begin{notebox}\centering
-\begin{tikzpicture}[x=.57cm,y=.45cm,>=Stealth,every node/.style={font=\fontsize{10}{11}\selectfont}]
+\begin{tikzpicture}[x=.43cm,y=.43cm,>=Stealth,every node/.style={font=\fontsize{10}{11}\selectfont}]
  #1
 \end{tikzpicture}\end{notebox}}
 \newcommand{\axes}[4]{%
@@ -110,13 +110,17 @@
 {Đồ thị $(C)$ có tối đa ba đường tiệm cận xiên.}
 {Đồ thị $(C)$ luôn có ít nhất một đường tiệm cận xiên.}
 \question[TDM31]{14} Cho hàm số $y=f(x)$ có đồ thị $(C)$ là hai nhánh như hình vẽ. Hỏi mệnh đề nào dưới đây là đúng hay sai?
-\figbox{\axes{-5.2}{6}{-4.7}{5.8}
- \draw[thin] (-4.2,6.3)--(5.1,-6) node[above right] {};
- \draw[thick,noteborder] plot[smooth] coordinates {(-4.2,6.7) (-3.3,5.35) (-1.3,3.1) (-.3,2.9) (.35,3.8) (.72,5.9) (.89,7.4)};
- \draw[thick,noteborder] plot[smooth] coordinates {(1.06,-7.3) (1.25,-5) (1.65,-3.2) (2.15,-2.9) (3.2,-4) (4.8,-6.2)};
- \draw[very thin] (1,-4.5)--(1,5.6);
- \node[below] at (1,0) {$2$}; \node[left] at (0,1) {$3$};\node[left] at (0,2) {$6$};
- \dotat{0}{1}\dotat{0}{2}\dotat{1}{1}\dotat{1}{0};\node at (-1.6,4.2) {$(C)$};}
+\figbox{\axes{-5.6}{8.73}{-6.04}{8.96}
+\draw[noteborder,thick] (-3.76,8.64) .. controls (-2.47,6.84) and (-1.24,4.53) .. (-0.2,4.51) .. controls (0.49,4.51) and (0.76,6.76) .. (0.84,8.98);
+\draw[noteborder,thick] (1.07,-5.82) .. controls (1.13,-3.67) and (1.27,-1.71) .. (2.07,-1.58) .. controls (3.07,-1.2) and (4.47,-4.71) .. (5.44,-5.64);
+\draw[black,thin] (-3.98,8.62)--(5.62,-5.69);
+\draw[black,thin] (0.93,8.98)--(0.93,-6.04);
+\draw[black,thin,densely dashed] (0,1.4)--(0.93,1.4);
+\dotat{0}{0} \dotat{0}{1.4} \dotat{0}{2.82} \dotat{0.93}{0} \dotat{0.93}{1.4} \node[left] at (0,1.4) {$3$};
+\node[left] at (0,2.82) {$6$};
+\node[below] at (0.93,0) {$2$};
+\node[right] at (-2.47,7.56) {$(C)$};
+}
 \tfbox{Đồ thị $(C)$ có đường tiệm cận đứng là $x=2$.}
 {Đồ thị $(C)$ có đường tiệm ngang là $y=3$.}
 {Đồ thị $(C)$ có đường tiệm cận xiên là $y=-\dfrac32x+6$.}
@@ -151,36 +155,57 @@ $\displaystyle\lim_{x\to+\infty}(f(x)-ax+2b)=0$ và $\displaystyle\lim_{x\to-\in
 \examtitle{TDMXX10}{KHẢO SÁT HÀM SỐ BẬC BA}
 \partone{12}
 \question[TDM31]{1} Cho hàm số $f(x)=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ bên dưới. Nhận xét nào dưới đây \textbf{đúng}?
-\figbox{\axes{-4.4}{4.3}{-3}{4.8}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.3,-2.8) (-2.05,2.7) (-1.2,2.2) (0,-.9) (.9,-2.1) (1.7,-.35) (2.6,3.6)};
- \vguide{-2.05}{2.7}\vguide{.9}{-2.1};\node[right] at (2.6,3.6) {$f(x)$};}
+\figbox{\axes{-9.47}{10.63}{-5.74}{8.53}
+\draw[grblue,thick] (-6.84,-3.53) .. controls (-5.89,2.11) and (-5.11,4.95) .. (-3.89,4.95) .. controls (-2.11,4.95) and (-0.11,-3.37) .. (1.89,-3.37) .. controls (3.68,-3.37) and (4.74,3.32) .. (5.32,5.95);
+\draw[black,thin,densely dashed] (-3.89,0)--(-3.89,4.95);
+\draw[black,thin,densely dashed] (1.89,0)--(1.89,-3.37);
+\dotat{-3.89}{4.95} \dotat{-3.89}{0} \dotat{1.89}{-3.37} \dotat{1.89}{0} \node[right] at (5.63,6.16) {$f(x)$};
+}
 \twochoices{$a>0;\ b>0;\ c<0;\ d<0$.}{$a>0;\ b<0;\ c<0;\ d<0$.}
 {$a>0;\ b>0;\ c>0;\ d>0$.}{$a<0;\ b<0;\ c>0;\ d<0$.}
 \question[TDM31]{2} Cho hàm số $f(x)=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ bên dưới. Nhận xét nào dưới đây \textbf{đúng}?
-\figbox{\axes{-4.6}{4.6}{-3.4}{3.8}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.4,-2.6) (-1.5,2.2) (-.8,1.5) (0,0) (1.5,-2.3) (3,2.6) (3.3,3.5)};
- \vguide{-1.5}{2.2}\vguide{1.5}{-2.3};\node[below] at (-1.5,0) {$-3$};\node[above right] at (1.5,0) {$3$};}
+\figbox{\axes{-9.47}{10.58}{-5.63}{7.26}
+\draw[grblue,thick] (-5.79,-4.32) .. controls (-5.11,-0.05) and (-4.16,4.21) .. (-2.89,4.21) .. controls (-1.21,4.21) and (0.79,-4.11) .. (2.74,-4.11) .. controls (4.53,-4.11) and (5.89,3.11) .. (6.42,6.79);
+\draw[black,thin,densely dashed] (-2.89,0)--(-2.89,4.21);
+\draw[black,thin,densely dashed] (2.74,0)--(2.74,-4.11);
+\dotat{-2.89}{4.21} \dotat{-2.89}{0} \dotat{2.74}{-4.11} \dotat{2.74}{0} \node[below] at (-2.89,0) {$-3$};
+\node[above] at (2.74,0) {$3$};
+\node[right] at (6.16,5.37) {$f(x)$};
+}
 \twochoices{$a>0;\ b=0;\ c<0;\ d>0$.}{$a>0;\ b<0;\ c<0;\ d=0$.}
 {$a>0;\ b<0;\ c=0;\ d=0$.}{$a>0;\ b=0;\ c<0;\ d=0$.}
 \question[TDM31]{3} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về dấu các hệ số $a,b,c,d$ là:
-\figbox{\axes{-4}{4}{-3.8}{2.5}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.2,-3.6) (-1.4,.5) (-.9,.4) (0,-.8) (1.65,-3.2) (3,1.6)};
- \vguide{-1.4}{.5}\vguide{1.65}{-3.2};\node at (-2.4,-2.6) {$(C)$};}
+\figbox{\axes{-6.1}{6.97}{-5.56}{2.51}
+\draw[grblue,thick] (-3.53,-5.04) .. controls (-2.82,-2.32) and (-2.11,0.41) .. (-1.15,0.53) .. controls (-0.19,0.66) and (1.27,-4.45) .. (2.23,-4.27) .. controls (3.19,-4.09) and (3.89,-1.21) .. (4.59,1.66);
+\draw[black,thin,densely dashed] (-1.15,0)--(-1.15,0.53);
+\draw[black,thin,densely dashed] (2.23,0)--(2.23,-4.27);
+\dotat{-1.15}{0.53} \dotat{-1.15}{0} \dotat{2.23}{-4.27} \dotat{2.23}{0} \node[left] at (-2.63,-2.89) {$(C)$};
+}
 \fourchoices{$ab>0;\ cd>0$}{$ac<0;\ bd>0$}{$ad<0;\ bc<0$}{$ac>0;\ bd>0$}
 \question[TDM31]{4} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về dấu các hệ số $a,b,c,d$ là:
-\figbox{\axes{-4}{4}{-3.6}{2.6}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.2,-3.5) (-1.55,1.5) (-.8,.8) (0,-1.1) (.55,-2.65) (1.2,-3) (2.5,2.2)};
- \vguide{-1.55}{1.5}\vguide{.55}{-2.65};\node at (2.2,2.35) {$(C)$};}
+\figbox{\axes{-7.27}{5.47}{-4.5}{2.97}
+\draw[grblue,thick] (-5.11,-3.79) .. controls (-4.47,-1.18) and (-3.83,1.43) .. (-2.85,1.57) .. controls (-1.89,1.71) and (-0.23,-2.95) .. (0.68,-2.94) .. controls (1.59,-2.91) and (2.07,-0.61) .. (2.55,1.7);
+\draw[noteborder,thin,densely dashed] (-2.85,0)--(-2.85,1.57);
+\draw[noteborder,thin,densely dashed] (0.68,0)--(0.68,-2.94);
+\dotat{-2.85}{1.57} \dotat{-2.85}{0} \dotat{0.68}{-2.94} \dotat{0.68}{0} \node[above] at (3.2,1.7) {$(C)$};
+}
 \fourchoices{$ab>0;\ cd>0$}{$ad<0;\ bc>0$}{$ac<0;\ bd>0$}{$ac>0;\ bd>0$}
 \question[TDM31]{5} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về dấu các hệ số $a,b,c,d$ là:
-\figbox{\axes{-3.6}{3.6}{-3.5}{3.5}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.1,3.2) (-1.55,-2.2) (-.95,-1.2) (0,1.15) (.48,2.15) (1.35,.2) (2.05,-2.5)};
- \vguide{-1.55}{-2.2}\vguide{.48}{2.15};\node[right] at (2.05,-2.5) {$(C)$};}
+\figbox{\axes{-6.3}{6.43}{-3.7}{4.23}
+\draw[grblue,thick] (-3.57,2.99) .. controls (-3.01,0.41) and (-2.45,-2.17) .. (-1.76,-2.35) .. controls (-1.06,-2.53) and (-0.08,2.03) .. (0.59,1.95) .. controls (1.27,1.87) and (1.77,-0.49) .. (2.27,-2.85);
+\draw[noteborder,thin,densely dashed] (-1.76,0)--(-1.76,-2.35);
+\draw[noteborder,thin,densely dashed] (0.59,0)--(0.59,1.95);
+\dotat{-1.76}{-2.35} \dotat{-1.76}{0} \dotat{0.59}{1.95} \dotat{0.59}{0} \node[right] at (2.43,-2.5) {$(C)$};
+}
 \fourchoices{$ab<0;\ cd>0$}{$ad<0;\ bc>0$}{$ac<0;\ bd<0$}{$ac>0;\ bd<0$}
 \question[TDM31]{6} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ. Nhận xét \textbf{đúng} về các hệ số $a,b,c,d$ là:
-\figbox{\axes{-4}{4.3}{-3.5}{4.1}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.25,-3) (-1.6,3) (0,1.9) (1.55,-1.05) (2.25,-1.7) (3.3,3.7)};
- \vguide{-1.6}{3}\vguide{2.25}{-1.7};\dotat{0}{1.9}\node[right] at (0,1.9) {$d$};\node[right] at (3.3,3.7) {$f(x)$};}
+\figbox{\axes{-6.25}{9.02}{-4.37}{6.37}
+\draw[grblue,thick] (-3.3,-3.34) .. controls (-2.99,0.37) and (-2.67,4.07) .. (-1.45,4.17) .. controls (-0.23,4.25) and (2.79,-3.05) .. (4.05,-2.77) .. controls (5.31,-2.5) and (5.71,1.65) .. (6.12,5.81);
+\draw[black,thin,densely dashed] (-1.45,0)--(-1.45,4.17);
+\draw[black,thin,densely dashed] (4.05,0)--(4.05,-2.77);
+\dotat{-1.45}{4.17} \dotat{-1.45}{0} \dotat{4.05}{-2.77} \dotat{4.05}{0} \dotat{0}{2.8} \node[right] at (0.09,2.77) {$d$};
+\node[right] at (6.12,5.81) {$f(x)$};
+}
 \twochoices{$a>0;\ b>0;\ c<0;\ d>0$.}{$a>0;\ b<0;\ c<0;\ d>0$.}
 {$a<0;\ b<0;\ c<0;\ d>0$.}{$a>0;\ b>0;\ c>0;\ d>0$.}
 \question[TDM21]{7} Đồ thị hàm số $y=x^3-3x^2+6x+1$ có tọa độ tâm đối xứng là
@@ -190,44 +215,82 @@ $\displaystyle\lim_{x\to+\infty}(f(x)-ax+2b)=0$ và $\displaystyle\lim_{x\to-\in
 \question[TDM31]{9} Đồ thị hàm số $y=ax^3+bx^2+cx+d$, với $a\ne0$, có hai điểm cực trị khi và chỉ khi
 \fourchoices{$b^2-3ac>0$}{$b^2-4ac>0$}{$b^2-ac>0$}{$b^2-2ac>0$}
 \question[TDM31]{10} Cho hàm số $y=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ bên dưới. Giá trị của biểu thức $(a+2b+4c)$ bằng:
-\figbox{\axes{-4.2}{3.4}{-4.3}{5}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.8,4.3) (-2,-3) (-1.25,-1.7) (0,3) (1,4.65) (2.2,1.5) (3.1,-3.5)};
- \vguide{-2}{-3}\vguide{1}{4.65};\dotat{0}{3};\node[left] at (0,3) {$3$};\node[left] at (0,-3) {$-3$};\node[above] at (-2,0) {$-2$};\node[below] at (1,0) {$1$};\node[right] at (2,2.4) {$f(x)$};}
+\figbox{\axes{-7.15}{6.85}{-2.73}{5.47}
+\draw[grblue,thick] (-4.45,4.44) .. controls (-3.71,1.16) and (-2.97,-2.12) .. (-2.05,-2.22) .. controls (-1.15,-2.31) and (0.02,3.81) .. (0.98,3.85) .. controls (1.94,3.89) and (2.82,0.97) .. (3.7,-1.95);
+\draw[noteborder,thin,densely dashed] (-2.05,0)--(-2.05,-2.22);
+\draw[noteborder,thin,densely dashed] (0.98,0)--(0.98,3.85);
+\dotat{-2.05}{-2.22} \dotat{-2.05}{0} \dotat{0.98}{3.85} \dotat{0.98}{0} \dotat{0}{2.37} \dotat{0}{-2.22} \node[above] at (-2.05,0) {$-2$};
+\node[below] at (0.98,0) {$1$};
+\node[left] at (0,2.37) {$3$};
+\node[left] at (0,-2.22) {$-3$};
+\node[right] at (4.12,2.94) {$f(x)$};
+}
 \fourchoices{$-11$}{$12$}{$16$}{$9$}
 \question[TDM32]{11} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ và đạo hàm cấp một $f'(x)$ có đồ thị $(P)$ như hình vẽ. Khi đó giá trị của $(a+b+c+d)$ bằng
-\figbox{\axes{-5}{3.3}{-3.2}{5.5}
- \draw[grblue,thick] plot[smooth] coordinates {(-4.6,-3.1) (-3,4.1) (-2,2.8) (-1,-.5) (-.55,-1.4) (0,3.2) (.3,5.3)};
- \draw[noteborder,thick,densely dotted] plot[smooth] coordinates {(-4,2.8) (-2,-3) (0,3.2) (.7,5.4)};
- \vguide{-3}{4.1}\vguide{-1}{-.5};\vguide{-2}{-3};\node[below] at (-3,0) {$-3$};\node[below] at (-2,0) {$-2$};\node[left] at (-2,-3) {$-3$};\node at (-4.25,4.2) {$(P)$};\node at (-4,-2.1) {$(C)$};}
+\figbox{\axes{-8.33}{5.6}{-3.47}{6.13}
+\draw[grblue,thick] (-6.68,-2.77) .. controls (-5.8,0.79) and (-4.92,4.36) .. (-3.99,4.6) .. controls (-3.05,4.84) and (-1.75,-1.49) .. (-1.05,-1.33) .. controls (-0.35,-1.16) and (-0.07,2.23) .. (0.21,5.61);
+\draw[red!80!black,thick,densely dotted] plot[smooth] coordinates {(-5.27,6.21) (-5.07,4.97) (-4.87,3.84) (-4.67,2.79) (-4.47,1.84) (-4.27,0.99) (-4.07,0.23) (-3.87,-0.43) (-3.67,-1) (-3.47,-1.47) (-3.27,-1.85) (-3.07,-2.14) (-2.87,-2.33) (-2.67,-2.42) (-2.47,-2.42) (-2.27,-2.33) (-2.07,-2.14) (-1.87,-1.85) (-1.67,-1.47) (-1.47,-1) (-1.27,-0.43) (-1.07,0.23) (-0.87,0.99) (-0.67,1.84) (-0.47,2.79) (-0.27,3.84) (-0.07,4.97) (0.13,6.21)};
+\draw[black,thin,densely dashed] (-3.99,4.6)--(-3.99,0);
+\draw[black,thin,densely dashed] (-2.57,0)--(-2.57,-2.43);
+\draw[black,thin,densely dashed] (-2.57,-2.43)--(-0.07,-2.43);
+\draw[black,thin,densely dashed] (-1.05,0)--(-1.05,-1.33);
+\dotat{-3.99}{4.6} \dotat{-3.99}{0} \dotat{-2.57}{0} \dotat{-2.57}{-2.43} \dotat{-1.05}{-1.33} \dotat{-1.05}{0} \dotat{0}{0} \dotat{0}{3.43} \node[below left] at (-4,0) {$-3$};
+\node[above] at (-2.57,0) {$-2$};
+\node[right] at (-0.07,-2.43) {$-3$};
+\node[left] at (-6.4,4.4) {$(P)$};
+\node[left] at (-6.47,-2.67) {$(C)$};
+}
 \fourchoices{$20$}{$0$}{$18$}{$25$}
 \question[TDM32]{12} Cho hàm số bậc ba $y=f(x)$ và đạo hàm cấp hai $f''(x)$ có đồ thị lần lượt là $(C)$ và $\Delta$ như hình vẽ. Nhận xét \textbf{đúng} về giá trị $f(3)$ là
-\figbox{\axes{-4.1}{5.5}{-3.3}{4.6}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.6,-3.2) (-1.9,3.8) (-1.05,2.5) (-.8,0) (0,-2.8) (1.2,-3.7) (3.2,1.45) (4.1,4.35)};
- \draw[thin] (-4,-1.25)--(5,2.4) node[above] {$\Delta$};\vguide{3.2}{1.45};\node[below] at (3.2,0) {$4$};\node[below] at (-.8,0) {$-1$};\node[left] at (0,1.45) {$30$};\draw[densely dashed] (0,1.45)--(3.2,1.45);\node at (3.2,3.2) {$(C)$};}
+\figbox{\axes{-8.31}{8.56}{-4.32}{4.61}
+\draw[grblue,thick] (-6.47,-2.68) .. controls (-5.44,0.4) and (-4.41,3.49) .. (-3.11,3.4) .. controls (-1.83,3.31) and (0,-3.16) .. (1.27,-3.23) .. controls (2.53,-3.29) and (3.51,-0.13) .. (4.49,3.03);
+\draw[black,thin] (-7.74,-2.31)--(6.93,2.61);
+\draw[black,thin,densely dashed] (0,1.69)--(4.09,1.69);
+\draw[black,thin,densely dashed] (4.09,1.69)--(4.09,0);
+\dotat{-0.87}{0} \dotat{0}{1.69} \dotat{4.09}{1.69} \dotat{4.09}{0} \node[below] at (-0.87,0) {$-1$};
+\node[below] at (4.09,0) {$4$};
+\node[left] at (0,1.69) {$30$};
+\node[above] at (6.96,2.61) {$\Delta$};
+\node[above] at (4.49,3.08) {$(C)$};
+}
 \twochoices{$-15<f(3)<-10$}{$25<f(3)<30$}{$15<f(3)<25$}{$-10<f(3)<0$}
 \parttwo{13}{16}
 \question[TDM31]{13} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Hỏi mệnh đề nào dưới đây là đúng hay sai?
-\figbox{\axes{-4.0}{3.8}{-3.8}{3.4}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.6,3.1) (-1.7,-2.2) (-.45,-2.8) (0,-1.8) (1.35,1.1) (1.85,1.25) (3.35,-3.3)};
- \node at (2.25,1.65) {$(C)$};}
+\figbox{\axes{-4.59}{5.68}{-4.28}{3.72}
+\draw[grblue,thick] (-3.24,2.67) .. controls (-2.35,0.06) and (-1.46,-2.55) .. (-0.61,-2.78) .. controls (0.24,-3.02) and (1.08,1.42) .. (1.89,1.27) .. controls (2.7,1.11) and (3.47,-1.31) .. (4.24,-3.72);
+\dotat{0}{0} \node[right] at (2.48,1.72) {$(C)$};
+}
 \tfbox{Số thực $a<0$.}
 {Đồ thị cắt trục tung tại điểm có tung độ dương.}
 {Phương trình $f(x)=0$ có đúng một nghiệm thực dương.}
 {Giá trị $bc>0$.}
 \question[TDM31]{14} Cho hàm số bậc ba $y=f(x)=x^3+bx^2+cx+d$ và đạo hàm cấp hai $f''(x)$ có đồ thị lần lượt là $(C)$ và $\Delta$ như hình vẽ. Hỏi mệnh đề nào dưới đây là đúng hay sai?
-\figbox{\axes{-4.5}{4.7}{-4.2}{4.4}
- \draw[grblue,thick] plot[smooth] coordinates {(-4.2,-3.9) (-2.7,1.95) (-1.5,1.25) (-1,0) (0,-2.7) (1,-3.7) (2.6,1.8)};
- \draw[thin] (-4.6,-2.8)--(4.5,2.9) node[above] {$\Delta$};
- \vguide{-2.7}{1.95}\vguide{1}{-3.7};\node[left] at (0,1.95) {$2$};\draw[densely dashed] (-2.7,1.95)--(0,1.95);
- \node[above] at (-1,0) {$-1$};\node[above] at (1,0) {$1$};\node[right] at (2.7,-.1) {$(C)$};}
+\figbox{\axes{-7.02}{7.11}{-4.56}{3.31}
+\draw[grblue,thick] (-6.73,-3.84) .. controls (-5.7,-0.75) and (-4.66,2.33) .. (-3.37,2.25) .. controls (-2.09,2.16) and (-0.25,-4.32) .. (1.01,-4.39) .. controls (2.27,-4.45) and (3.25,-1.29) .. (4.23,1.86);
+\draw[black,thin] (-7.95,-3.19)--(5.91,3.25);
+\draw[black,thin,densely dashed] (-3.37,2.25)--(0,2.25);
+\draw[black,thin,densely dashed] (1.01,0)--(1.01,-4.39);
+\dotat{-3.37}{2.25} \dotat{0}{2.25} \dotat{0}{0} \dotat{-1.16}{0} \dotat{1.01}{-4.39} \dotat{1.01}{0} \node[above left] at (0,2.25) {$2$};
+\node[above] at (-1.16,0) {$-1$};
+\node[above] at (1.01,0) {$1$};
+\node[above] at (5.78,3.24) {$\Delta$};
+\node[right] at (3.38,-2.89) {$(C)$};
+}
 \tfbox{Số thực $b=3$.}
 {Số thực $c=9$.}
 {Số thực $d=-20$.}
 {Giá trị biểu thức $b+c+d=-26$.}
 \question[TDM31]{15} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về giá trị thực của tham số $m$ là gì? Hỏi mệnh đề nào dưới đây là đúng hay sai?
-\figbox{\axes{-4}{4}{-3.5}{4.3}
- \draw[grblue,thick] plot[smooth] coordinates {(-3.5,3.9) (-1.8,-2) (-1,-1.2) (0,2) (1,0) (2.5,-3.1)};
- \vguide{-1.8}{-2};\node[above] at (-1.8,0) {$m$};\node[left] at (0,2) {$2$};\node[right] at (0,-2) {$-2$};\node[above] at (1,0) {$1$};\node[right] at (2.5,-3) {$(C)$};}
+\figbox{\axes{-9.4}{7.9}{-5.75}{6.3}
+\draw[grblue,thick] (-5.6,5.65) .. controls (-4.8,1.9) and (-3.95,-3.1) .. (-2.85,-3.1) .. controls (-1.75,-3.1) and (-1.05,3.05) .. (0,3.05) .. controls (1.25,3.05) and (2.65,-2.35) .. (3.5,-4.4);
+\draw[black,thin,densely dashed] (-2.85,0)--(-2.85,-3.1);
+\draw[black,thin,densely dashed] (-2.85,-3.1)--(0,-3.1);
+\node[above] at (-2.85,0) {$m$};
+\node[above] at (2.2,0) {$1$};
+\node[above] at (0,3.05) {$2$};
+\node[right] at (0,-3.1) {$-2$};
+\node[right] at (3.7,-4.4) {$(C)$};
+}
 \tfbox{$d=2$.}{$c=0$.}{Giá trị nhỏ nhất của hàm số $f(x)$ trên đoạn $[m;1]$ bằng $-2$.}{Giá trị $m=-2$.}
 \question[TDM31]{16} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$. Biết $I(1;2)$ là tâm đối xứng của $(C)$ và $A(-1;18)$ là một điểm cực trị của $(C)$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
 \tfbox{Điểm cực trị khác của $(C)$ có tọa độ là $(3;-11)$.}
@@ -238,10 +301,17 @@ $\displaystyle\lim_{x\to+\infty}(f(x)-ax+2b)=0$ và $\displaystyle\lim_{x\to-\in
 \question[TDM31]{18} Biết đồ thị của hàm số $y=f(x)=x^3+bx^2+cx+d$ có một điểm cực trị là $A(1;2)$. Khi đó giá trị biểu thức $T=b+2c+3d$ bằng bao nhiêu?
 \shortanswer
 \question[TDM31]{19} Cho hàm số bậc ba có đồ thị $(C)$ được biểu diễn như hình vẽ bên dưới. Khi đó giá trị của tổng $(a+b)$ bằng bao nhiêu?
-\figbox{\axes{-5.2}{4.7}{-3.3}{3.7}
- \draw[grblue,thick] plot[smooth] coordinates {(-4.2,-3) (-2.65,2.7) (-1.4,1.6) (0,-1.4) (.65,-2.35) (2.15,-.15) (3,2.7)};
- \vguide{-2.65}{2.7}\vguide{.65}{-2.35};
- \node[above] at (-4.0,0) {$-6$};\node[above] at (-2.65,0) {$a$};\node[above] at (-1,0) {$-1$};\node[above] at (.65,0) {$b$};\node[above] at (2,0) {$4$};\node[right] at (3,2.7) {$(C)$};}
+\figbox{\axes{-9.2}{8.4}{-5.6}{5.15}
+\draw[grblue,thick] (-7.05,-4) .. controls (-5.8,0.4) and (-4.5,3.65) .. (-2.95,3.65) .. controls (-1.7,3.65) and (-0.1,-3.3) .. (1.1,-3.3) .. controls (2.6,-3.3) and (3.8,0.95) .. (4.7,3.75);
+\draw[black,thin,densely dashed] (-2.95,3.65)--(-2.95,0);
+\draw[black,thin,densely dashed] (1.1,0)--(1.1,-3.3);
+\dotat{-2.95}{3.65} \dotat{-2.95}{0} \dotat{1.1}{0} \dotat{1.1}{-3.3} \node[below] at (-5.45,0) {$-6$};
+\node[below] at (-2.95,0) {$a$};
+\node[above] at (-1.2,0) {$-1$};
+\node[above] at (1.1,0) {$b$};
+\node[below] at (3.75,0) {$4$};
+\node[right] at (5.1,3.4) {$(C)$};
+}
 \shortanswer
 \question[TDM32]{20} Cho hàm số $y=(m-1)x^3-(m-3)x-2m+2022$. Gọi $S$ là tập tất cả các giá trị nguyên của tham số $m$ để hàm số đồng biến trên $\mathbb R$. Số phần tử tập $S$ bằng bao nhiêu?
 \shortanswer
@@ -258,19 +328,21 @@ $\displaystyle\lim_{x\to+\infty}(f(x)-ax+2b)=0$ và $\displaystyle\lim_{x\to-\in
 \question[TDM31]{2} Đồ thị hàm số $y=\dfrac{2x-3}{x+1}$ có trục đối xứng (không cắt đồ thị) có phương trình là
 \fourchoices{$y=x+3$}{$y=-x+1$}{$y=2x-1$}{$y=x+1$}
 \question[TDM31]{3} Cho hàm số $f(x)=\dfrac{ax+b}{cx+d}$ có đồ thị cho như hình vẽ. Nhận xét đúng khi nói về dấu các hệ số $a,b,c,d$ là:
-\figbox{\axes{-4.2}{4.1}{-3.1}{4.1}
- \draw[thin] (.45,-3.1)--(.45,4.15);
- \draw[thin] (-4,-.55)--(4,-.55);
- \draw[thick] plot[smooth] coordinates {(-4,-.9) (-2,-.62) (-1,-.35) (0,1.2) (.24,3.55)};
- \draw[thick] plot[smooth] coordinates {(.72,-3) (1.15,-1.75) (2.2,-1.1) (4,-.85)};}
+\figbox{\axes{-4.03}{6.8}{-5.63}{3.97}
+\draw[black,thick] (-4.34,-0.71) .. controls (-2.83,-0.69) and (-2,-0.43) .. (-1.49,0) .. controls (-0.74,0.37) and (0.49,1.91) .. (0.63,3.29);
+\draw[black,thick] (1.49,-5.4) .. controls (1.6,-3.4) and (3.6,-1.51) .. (6.54,-1.4);
+\draw[black,thin] (1.06,3.31)--(1.06,-5.63);
+\draw[black,thin] (-4.34,-1.06)--(6.54,-1.06);
+}
 \twochoices{$\begin{cases}ab>0\\cd>0\end{cases}$}{$\begin{cases}ad>0\\bc<0\end{cases}$}
 {$\begin{cases}ad<0\\bc>0\end{cases}$}{$\begin{cases}ac>0\\bd>0\end{cases}$}
 \question[TDM31]{4} Cho hàm số $f(x)=\dfrac{ax+b}{cx+d}$ có đồ thị cho như hình vẽ. Nhận xét đúng khi nói về dấu các hệ số $a,b,c,d$ là:
-\figbox{\axes{-4.3}{4}{-4}{3.9}
- \draw[thin] (.45,-3.9)--(.45,3.85);
- \draw[thin] (-4,-.48)--(3.8,-.48);
- \draw[thick] plot[smooth] coordinates {(-3.9,-.77) (-2.5,-1.15) (-1.0,-2.1) (-.1,-3.5)};
- \draw[thick] plot[smooth] coordinates {(.75,3.5) (1.15,1.95) (2.3,.5) (3.8,-.05)};}
+\figbox{\axes{-2.96}{4.98}{-4.73}{2.88}
+\draw[black,thick] (-2.69,-0.96) .. controls (-1.44,-0.96) and (-0.02,-2) .. (0.29,-3.12) .. controls (0.5,-3.71) and (0.54,-4.25) .. (0.54,-4.5);
+\draw[black,thick] (0.92,2.58) .. controls (0.94,1.29) and (1.9,0.08) .. (2.56,0) .. controls (3.48,-0.54) and (4.31,-0.65) .. (4.92,-0.6);
+\draw[black,thin] (0.77,2.83)--(0.77,-4.73);
+\draw[black,thin] (-2.96,-0.77)--(4.98,-0.77);
+}
 \twochoices{$\begin{cases}ab<0\\cd>0\end{cases}$}{$\begin{cases}ab>0\\cd<0\end{cases}$}
 {$\begin{cases}ad>0\\bc>0\end{cases}$}{$\begin{cases}ac>0\\bd<0\end{cases}$}
 \question[TDM31]{5} Cho hàm số $y=\dfrac{ax+b}{cx+d}$ có đồ thị $(C)$ và nhận điểm $(2;-1)$ làm tâm đối xứng. Đồ thị $(C)$ cắt hai trục tọa độ lần lượt tại $M$ và $N$ sao cho diện tích tam giác $OMN$ bằng $2$. Hàm số đã cho tương ứng là:
