@@ -1,0 +1,314 @@
+% BTVN_B5.tex — bien tap tu ba de TDMXX09, TDMXX10, TDMXX11.
+% Do thi duoc ve lai bang TikZ. Bien tap theo phong cach BTVN_01_B1.tex.
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=15mm,right=15mm,top=14mm,bottom=18mm,footskip=9mm]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T5]{fontenc}\usepackage[utf8]{inputenc}\usepackage{mathptmx}
+\else
+  \usepackage{fontspec}
+  \IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{%
+    \IfFontExistsTF{Liberation Serif}{\setmainfont{Liberation Serif}}{\setmainfont{Latin Modern Roman}}}
+\fi
+\usepackage{amsmath,amssymb,fix-cm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{tcolorbox,tabularx,fancyhdr,lastpage}
+\definecolor{sectionpurple}{RGB}{155,42,143}
+\definecolor{notebackground}{RGB}{229,240,245}
+\definecolor{noteborder}{RGB}{255,55,55}
+\definecolor{grblue}{RGB}{37,77,194}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\fontsize{8.5}{10}\selectfont Biên soạn: \textbf{Nguyễn Anh Dũng}}
+\fancyfoot[R]{\fontsize{8.5}{10}\selectfont Trang \thepage/\pageref{LastPage} -- BTVN B5}
+\newtcolorbox{notebox}{colback=notebackground,colframe=noteborder,
+ boxrule=.65pt,arc=1.5pt,left=5pt,right=5pt,top=2pt,bottom=2pt,
+ before skip=2pt,after skip=2pt}
+\newcommand{\question}[2][TDM31]{%
+  \par\addvspace{2pt}\noindent\textbf{\textcolor{sectionpurple}{Câu #2:} \textcolor{noteborder}{[#1]}}\enspace}
+\newcommand{\answerlabel}[1]{\textbf{\textcolor{sectionpurple}{#1.}}}
+\newcommand{\fourchoices}[4]{%
+ \par\nobreak\vspace{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}lll@{}}
+ \answerlabel{A} #1 & \answerlabel{B} #2 & \answerlabel{C} #3 & \answerlabel{D} #4
+ \end{tabular*}\par}
+\newcommand{\twochoices}[4]{%
+ \par\nobreak\vspace{1pt}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+ \answerlabel{A} #1 & \answerlabel{B} #2 \\[1pt]
+ \answerlabel{C} #3 & \answerlabel{D} #4
+ \end{tabularx}\par}
+\newcommand{\tfbox}[4]{%
+\begin{notebox}\renewcommand{\arraystretch}{1.17}\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{|>{\bfseries\color{sectionpurple}}c|>{\raggedright\arraybackslash}X|c|c|}
+\hline\multicolumn{2}{|c|}{\textbf{\textcolor{sectionpurple}{Mệnh đề}}}&
+\textbf{\textcolor{sectionpurple}{Đ}}&\textbf{\textcolor{sectionpurple}{S}}\\\hline
+ a & #1 & $\bigcirc$ & $\bigcirc$ \\ \hline
+ b & #2 & $\bigcirc$ & $\bigcirc$ \\ \hline
+ c & #3 & $\bigcirc$ & $\bigcirc$ \\ \hline
+ d & #4 & $\bigcirc$ & $\bigcirc$ \\ \hline
+\end{tabularx}\end{notebox}}
+\newcommand{\shortanswer}{%
+ \par\nobreak\hfill\begin{tikzpicture}[baseline=-.7ex]
+ \node[draw=noteborder,fill=notebackground,line width=.6pt,rounded corners=1pt,
+ minimum width=23mm,minimum height=5mm,inner sep=0pt] {};
+ \end{tikzpicture}\par}
+\newcommand{\examtitle}[2]{%
+ \par\begin{center}\textbf{ĐỀ #1}\\[-1pt]\textbf{#2}\\[-1pt]
+ {\fontsize{10.5}{12}\selectfont\itshape Form đề chuẩn bám sát BGD2026 -- Thời gian làm bài \textbf{90 phút}}\end{center}\vspace{-7pt}}
+\newcommand{\partone}[1]{\par\addvspace{3pt}\textbf{Phần I. Câu trắc nghiệm nhiều phương án lựa chọn.} Thí sinh trả lời từ câu 1 đến câu #1. Mỗi câu chỉ chọn một phương án.\par}
+\newcommand{\parttwo}[2]{\par\addvspace{4pt}\textbf{Phần II. Câu trắc nghiệm đúng sai.} Thí sinh trả lời từ câu #1 đến câu #2, trong mỗi ý a), b), c), d) chọn đúng hoặc sai.\par}
+\newcommand{\partthree}[2]{\par\addvspace{4pt}\textbf{Phần III. Câu trắc nghiệm trả lời ngắn.} Thí sinh trả lời từ câu #1 đến câu #2.\par}
+\newcommand{\finishExam}{\par\vspace{3pt}{\centering\textbf{\textcolor{sectionpurple}{--- Hết ---}}\par}}
+% Hinh ve la minh hoa do thi so, dung nhan tren nguon va cac diem dac biet.
+% Truc va cac duong cong la vector TikZ, khong co tep anh ngoai.
+\newcommand{\figbox}[1]{%
+\begin{notebox}\centering
+\begin{tikzpicture}[x=.57cm,y=.45cm,>=Stealth,every node/.style={font=\fontsize{10}{11}\selectfont}]
+ #1
+\end{tikzpicture}\end{notebox}}
+\newcommand{\axes}[4]{%
+ \draw[thin,-{Stealth[length=4pt]}] (#1,0)--(#2,0) node[below] {$x$};
+ \draw[thin,-{Stealth[length=4pt]}] (0,#3)--(0,#4) node[right] {$y$};
+ \node[below left] at (0,0) {$O$};}
+\newcommand{\dotat}[2]{\fill (#1,#2) circle (1.3pt);}
+\newcommand{\vguide}[2]{\draw[thin,densely dashed] (#1,0)--(#1,#2);\dotat{#1}{0}\dotat{#1}{#2}}
+\begin{document}
+\fontsize{11.5}{14}\selectfont
+\examtitle{TDMXX09}{CƠ BẢN VỀ TIỆM CẬN XIÊN CỦA ĐỒ THỊ HÀM SỐ}
+\partone{12}
+\question[TDM21]{1} Tiệm cận xiên của đồ thị hàm số $y=x+2+\dfrac{1}{x-1}$ là
+\fourchoices{$y=x+2$}{$x=-2$}{$x=1$}{$y=2$}
+\question[TDM21]{2} Tiệm cận xiên của đồ thị hàm số $y=\dfrac{x^2-3x}{x}$ là
+\fourchoices{$y=x+3$}{$y=2$}{$y=x-3$}{$x=0$}
+\question[TDM21]{3} Tiệm cận xiên của đồ thị hàm số $y=\dfrac{x^3+1}{x^2-2}$ là
+\fourchoices{$y=x^2-2$}{$y=\sqrt2$}{$x=\sqrt2$}{$y=x$}
+\question[TDM21]{4} Tiệm cận xiên của đồ thị hàm số $y=x+3+\dfrac{x-2}{x-1}$ là
+\fourchoices{$y=x+3$}{$y=x+4$}{$x=4$}{$y=2x+3$}
+\question[TDM21]{5} Tiệm cận xiên của đồ thị hàm số $y=x-2+\dfrac{x^2}{x+1}$ là
+\fourchoices{$y=x-2$}{$y=x-3$}{$y=2x-3$}{$y=x+6$}
+\question[TDM31]{6} Số đường tiệm cận của đồ thị hàm số $y=\dfrac{x^3+10}{x^2-3x+2}$ là
+\fourchoices{$2$}{$1$}{$0$}{$3$}
+\question[TDM31]{7} Cho hàm số $y=x+1+\dfrac{1}{\sqrt{2-x}}+e^x$ có đồ thị $(C)$. Đường tiệm cận xiên của $(C)$ là
+\fourchoices{$y=x$}{$y=2x+1$}{$y=x+1$}{$y=-x-1$}
+\question[TDM31]{8} Cho hàm số $y=x-\sqrt{x^2-4x}$ có đồ thị $(C)$. Đường tiệm cận xiên của $(C)$ là
+\fourchoices{$y=2x+1$}{$y=2x-2$}{$y=x+2$}{$y=-2x+4$}
+\question[TDM31]{9} Biết rằng tiệm cận xiên và tiệm cận đứng của đồ thị hàm số $y=\dfrac{x^2-4x+2}{x-1}$ có phương trình lần lượt là $y=x-a$ và $x=b$. Giá trị $T=ab$ bằng bao nhiêu?
+\fourchoices{$6$}{$3$}{$-12$}{$4$}
+\question[TDM31]{10} Tổng số các đường tiệm cận của đồ thị hàm số $y=\dfrac{x^2}{x-1}-\sqrt{x^2+2x}$ là
+\fourchoices{$2$}{$3$}{$1$}{$0$}
+\question[TDM31]{11} Cho hàm số $y=f(x)=\dfrac{ax^2+(2a-1)x+b}{x-a}$ có đồ thị $(C)$. Biết $(C)$ có tiệm cận đứng là $x=2$. Đường tiệm cận xiên của $(C)$ có phương trình là
+\fourchoices{$y=2x+7$}{$y=x-2$}{$y=2x-1$}{$y=2x+3$}
+\question[TDM31]{12} Cho hàm số $y=f(x)$ có đồ thị $(C)$ và thỏa mãn $\displaystyle\lim_{x\to\pm\infty}(2f(x)-4x)=2$. Tiệm cận xiên của đồ thị $(C)$ là
+\fourchoices{$y=4x+2$}{$y=2x+1$}{$y=2x-2$}{$y=2x+2$}
+\parttwo{13}{16}
+\question[TDM31]{13} Cho hàm số $y=f(x)$ có đồ thị $(C)$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\tfbox{Đường tiệm cận xiên của $(C)$ có thể cắt $(C)$.}
+{Đường tiệm cận xiên của $(C)$ không thể có điểm chung với $(C)$.}
+{Đồ thị $(C)$ có tối đa ba đường tiệm cận xiên.}
+{Đồ thị $(C)$ luôn có ít nhất một đường tiệm cận xiên.}
+\question[TDM31]{14} Cho hàm số $y=f(x)$ có đồ thị $(C)$ là hai nhánh như hình vẽ. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\figbox{\axes{-5.2}{6}{-4.7}{5.8}
+ \draw[thin] (-4.2,6.3)--(5.1,-6) node[above right] {};
+ \draw[thick,noteborder] plot[smooth] coordinates {(-4.2,6.7) (-3.3,5.35) (-1.3,3.1) (-.3,2.9) (.35,3.8) (.72,5.9) (.89,7.4)};
+ \draw[thick,noteborder] plot[smooth] coordinates {(1.06,-7.3) (1.25,-5) (1.65,-3.2) (2.15,-2.9) (3.2,-4) (4.8,-6.2)};
+ \draw[very thin] (1,-4.5)--(1,5.6);
+ \node[below] at (1,0) {$2$}; \node[left] at (0,1) {$3$};\node[left] at (0,2) {$6$};
+ \dotat{0}{1}\dotat{0}{2}\dotat{1}{1}\dotat{1}{0};\node at (-1.6,4.2) {$(C)$};}
+\tfbox{Đồ thị $(C)$ có đường tiệm cận đứng là $x=2$.}
+{Đồ thị $(C)$ có đường tiệm ngang là $y=3$.}
+{Đồ thị $(C)$ có đường tiệm cận xiên là $y=-\dfrac32x+6$.}
+{Nếu hàm số có dạng $y=f(x)=\dfrac{ax^2+bx+c}{x+n}$ thì $abn=-27$.}
+\question[TDM32]{15} Cho hàm số $y=f(x)$ có đồ thị $(C)$. Biết hàm số thỏa mãn các giới hạn $\displaystyle\lim_{x\to+\infty}(f(x)-3x)=2$ và $\displaystyle\lim_{x\to-\infty}(f(x)-2x)=3$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\tfbox{Đồ thị $(C)$ không có tiệm cận xiên.}
+{Đồ thị $(C)$ có đường tiệm cận xiên là $y=3x+2$.}
+{Đồ thị $(C)$ có đường tiệm cận xiên là $y=2x+3$.}
+{Giao của hai đường tiệm cận xiên của $(C)$ có tọa độ là $(1;5)$.}
+\question[TDM32]{16} Cho hàm số $y=f(x)=\dfrac{ax+2}{x+d}$ có đồ thị $(C)$. Biết tiệm cận đứng và tiệm cận ngang của $(C)$ có phương trình lần lượt là $x=2$ và $y=3$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\tfbox{Giá trị của $a$ bằng $3$.}
+{Giá trị của $d$ bằng $2$.}
+{Đồ thị hàm số $y=xf(x)$ có đường tiệm cận xiên là $y=3x+8$.}
+{Để đồ thị hàm số $y=\dfrac{x+b}{cx+1}f(x)$ có đường tiệm cận xiên là $y=3x+5$ thì $b+c=-1$.}
+\partthree{17}{22}
+\question[TDM31]{17} Cho hàm số $y=f(x)=\dfrac{x^3+4x}{x^2-1}$ có đồ thị $(C)$. Hãy tính diện tích hình phẳng giới hạn bởi ba đường tiệm cận của $(C)$ với trục hoành $Ox$ (làm tròn kết quả đến hàng đơn vị)?
+\shortanswer
+\question[TDM31]{18} Biết rằng tiệm cận xiên và tiệm cận đứng của đồ thị hàm số $y=\dfrac{x^2+ax+10}{x+b}$ có phương trình lần lượt là $y=x-2$ và $x=3$. Giá trị biểu thức $T=a+b$ bằng bao nhiêu?
+\shortanswer
+\question[TDM31]{19} Cho hàm số $y=2x-\sqrt{x^2-6x+1}$ có đồ thị $(C)$. Biết $(C)$ có hai đường tiệm cận xiên là $y=ax+b$ và $y=cx+d$. Giá trị $T=ad+bc$ bằng bao nhiêu?
+\shortanswer
+\question[TDM31]{20} Cho hàm số $y=f(x)$ có đồ thị $(C)$. Biết với hai số thực $a,b$ ta có
+$\displaystyle\lim_{x\to+\infty}(f(x)-ax+2b)=0$ và $\displaystyle\lim_{x\to-\infty}(f(x)-(3b-2)x+a+1)=0$.
+Để có đúng một đường tiệm cận xiên thì $T=3a+b$ bằng bao nhiêu?
+\shortanswer
+\question[TDM32]{21} Biết tiệm cận xiên của đồ thị hàm số $y=f(x)=\dfrac{x^2+2mx+5}{x-1}$ cách đường thẳng $y=x$ một khoảng bằng $\sqrt2$. Hãy tính tổng tất cả các giá trị thực của $m$ thỏa mãn bài toán?
+\shortanswer
+\question[TDM32]{22} Biết tiệm cận xiên của đồ thị hàm số $y=f(x)=\dfrac{(a+b)x^3+4x^2+ax+3}{(2a+b)x-1}$ có phương trình $y=2x+c$. Giá trị biểu thức $T=2a+b+c$ bằng bao nhiêu?
+\shortanswer
+\finishExam
+\clearpage
+\examtitle{TDMXX10}{KHẢO SÁT HÀM SỐ BẬC BA}
+\partone{12}
+\question[TDM31]{1} Cho hàm số $f(x)=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ bên dưới. Nhận xét nào dưới đây \textbf{đúng}?
+\figbox{\axes{-4.4}{4.3}{-3}{4.8}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.3,-2.8) (-2.05,2.7) (-1.2,2.2) (0,-.9) (.9,-2.1) (1.7,-.35) (2.6,3.6)};
+ \vguide{-2.05}{2.7}\vguide{.9}{-2.1};\node[right] at (2.6,3.6) {$f(x)$};}
+\twochoices{$a>0;\ b>0;\ c<0;\ d<0$.}{$a>0;\ b<0;\ c<0;\ d<0$.}
+{$a>0;\ b>0;\ c>0;\ d>0$.}{$a<0;\ b<0;\ c>0;\ d<0$.}
+\question[TDM31]{2} Cho hàm số $f(x)=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ bên dưới. Nhận xét nào dưới đây \textbf{đúng}?
+\figbox{\axes{-4.6}{4.6}{-3.4}{3.8}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.4,-2.6) (-1.5,2.2) (-.8,1.5) (0,0) (1.5,-2.3) (3,2.6) (3.3,3.5)};
+ \vguide{-1.5}{2.2}\vguide{1.5}{-2.3};\node[below] at (-1.5,0) {$-3$};\node[above right] at (1.5,0) {$3$};}
+\twochoices{$a>0;\ b=0;\ c<0;\ d>0$.}{$a>0;\ b<0;\ c<0;\ d=0$.}
+{$a>0;\ b<0;\ c=0;\ d=0$.}{$a>0;\ b=0;\ c<0;\ d=0$.}
+\question[TDM31]{3} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về dấu các hệ số $a,b,c,d$ là:
+\figbox{\axes{-4}{4}{-3.8}{2.5}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.2,-3.6) (-1.4,.5) (-.9,.4) (0,-.8) (1.65,-3.2) (3,1.6)};
+ \vguide{-1.4}{.5}\vguide{1.65}{-3.2};\node at (-2.4,-2.6) {$(C)$};}
+\fourchoices{$ab>0;\ cd>0$}{$ac<0;\ bd>0$}{$ad<0;\ bc<0$}{$ac>0;\ bd>0$}
+\question[TDM31]{4} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về dấu các hệ số $a,b,c,d$ là:
+\figbox{\axes{-4}{4}{-3.6}{2.6}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.2,-3.5) (-1.55,1.5) (-.8,.8) (0,-1.1) (.55,-2.65) (1.2,-3) (2.5,2.2)};
+ \vguide{-1.55}{1.5}\vguide{.55}{-2.65};\node at (2.2,2.35) {$(C)$};}
+\fourchoices{$ab>0;\ cd>0$}{$ad<0;\ bc>0$}{$ac<0;\ bd>0$}{$ac>0;\ bd>0$}
+\question[TDM31]{5} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về dấu các hệ số $a,b,c,d$ là:
+\figbox{\axes{-3.6}{3.6}{-3.5}{3.5}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.1,3.2) (-1.55,-2.2) (-.95,-1.2) (0,1.15) (.48,2.15) (1.35,.2) (2.05,-2.5)};
+ \vguide{-1.55}{-2.2}\vguide{.48}{2.15};\node[right] at (2.05,-2.5) {$(C)$};}
+\fourchoices{$ab<0;\ cd>0$}{$ad<0;\ bc>0$}{$ac<0;\ bd<0$}{$ac>0;\ bd<0$}
+\question[TDM31]{6} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ. Nhận xét \textbf{đúng} về các hệ số $a,b,c,d$ là:
+\figbox{\axes{-4}{4.3}{-3.5}{4.1}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.25,-3) (-1.6,3) (0,1.9) (1.55,-1.05) (2.25,-1.7) (3.3,3.7)};
+ \vguide{-1.6}{3}\vguide{2.25}{-1.7};\dotat{0}{1.9}\node[right] at (0,1.9) {$d$};\node[right] at (3.3,3.7) {$f(x)$};}
+\twochoices{$a>0;\ b>0;\ c<0;\ d>0$.}{$a>0;\ b<0;\ c<0;\ d>0$.}
+{$a<0;\ b<0;\ c<0;\ d>0$.}{$a>0;\ b>0;\ c>0;\ d>0$.}
+\question[TDM21]{7} Đồ thị hàm số $y=x^3-3x^2+6x+1$ có tọa độ tâm đối xứng là
+\fourchoices{$(0;1)$}{$(-1;-9)$}{$(1;8)$}{$(1;5)$}
+\question[TDM31]{8} Gọi $(C)$ là đồ thị của hàm số $y=x^3+bx^2+cx+d$. Biết $(C)$ có tâm đối xứng là $I(2;3)$ và $y(1)=m$. Hãy tính theo $m$ giá trị của hàm số tại $x=3$.
+\fourchoices{$m+1$}{$2m-3$}{$6-m$}{$m+3$}
+\question[TDM31]{9} Đồ thị hàm số $y=ax^3+bx^2+cx+d$, với $a\ne0$, có hai điểm cực trị khi và chỉ khi
+\fourchoices{$b^2-3ac>0$}{$b^2-4ac>0$}{$b^2-ac>0$}{$b^2-2ac>0$}
+\question[TDM31]{10} Cho hàm số $y=ax^3+bx^2+cx+d$ có đồ thị như hình vẽ bên dưới. Giá trị của biểu thức $(a+2b+4c)$ bằng:
+\figbox{\axes{-4.2}{3.4}{-4.3}{5}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.8,4.3) (-2,-3) (-1.25,-1.7) (0,3) (1,4.65) (2.2,1.5) (3.1,-3.5)};
+ \vguide{-2}{-3}\vguide{1}{4.65};\dotat{0}{3};\node[left] at (0,3) {$3$};\node[left] at (0,-3) {$-3$};\node[above] at (-2,0) {$-2$};\node[below] at (1,0) {$1$};\node[right] at (2,2.4) {$f(x)$};}
+\fourchoices{$-11$}{$12$}{$16$}{$9$}
+\question[TDM32]{11} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ và đạo hàm cấp một $f'(x)$ có đồ thị $(P)$ như hình vẽ. Khi đó giá trị của $(a+b+c+d)$ bằng
+\figbox{\axes{-5}{3.3}{-3.2}{5.5}
+ \draw[grblue,thick] plot[smooth] coordinates {(-4.6,-3.1) (-3,4.1) (-2,2.8) (-1,-.5) (-.55,-1.4) (0,3.2) (.3,5.3)};
+ \draw[noteborder,thick,densely dotted] plot[smooth] coordinates {(-4,2.8) (-2,-3) (0,3.2) (.7,5.4)};
+ \vguide{-3}{4.1}\vguide{-1}{-.5};\vguide{-2}{-3};\node[below] at (-3,0) {$-3$};\node[below] at (-2,0) {$-2$};\node[left] at (-2,-3) {$-3$};\node at (-4.25,4.2) {$(P)$};\node at (-4,-2.1) {$(C)$};}
+\fourchoices{$20$}{$0$}{$18$}{$25$}
+\question[TDM32]{12} Cho hàm số bậc ba $y=f(x)$ và đạo hàm cấp hai $f''(x)$ có đồ thị lần lượt là $(C)$ và $\Delta$ như hình vẽ. Nhận xét \textbf{đúng} về giá trị $f(3)$ là
+\figbox{\axes{-4.1}{5.5}{-3.3}{4.6}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.6,-3.2) (-1.9,3.8) (-1.05,2.5) (-.8,0) (0,-2.8) (1.2,-3.7) (3.2,1.45) (4.1,4.35)};
+ \draw[thin] (-4,-1.25)--(5,2.4) node[above] {$\Delta$};\vguide{3.2}{1.45};\node[below] at (3.2,0) {$4$};\node[below] at (-.8,0) {$-1$};\node[left] at (0,1.45) {$30$};\draw[densely dashed] (0,1.45)--(3.2,1.45);\node at (3.2,3.2) {$(C)$};}
+\twochoices{$-15<f(3)<-10$}{$25<f(3)<30$}{$15<f(3)<25$}{$-10<f(3)<0$}
+\parttwo{13}{16}
+\question[TDM31]{13} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\figbox{\axes{-4.0}{3.8}{-3.8}{3.4}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.6,3.1) (-1.7,-2.2) (-.45,-2.8) (0,-1.8) (1.35,1.1) (1.85,1.25) (3.35,-3.3)};
+ \node at (2.25,1.65) {$(C)$};}
+\tfbox{Số thực $a<0$.}
+{Đồ thị cắt trục tung tại điểm có tung độ dương.}
+{Phương trình $f(x)=0$ có đúng một nghiệm thực dương.}
+{Giá trị $bc>0$.}
+\question[TDM31]{14} Cho hàm số bậc ba $y=f(x)=x^3+bx^2+cx+d$ và đạo hàm cấp hai $f''(x)$ có đồ thị lần lượt là $(C)$ và $\Delta$ như hình vẽ. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\figbox{\axes{-4.5}{4.7}{-4.2}{4.4}
+ \draw[grblue,thick] plot[smooth] coordinates {(-4.2,-3.9) (-2.7,1.95) (-1.5,1.25) (-1,0) (0,-2.7) (1,-3.7) (2.6,1.8)};
+ \draw[thin] (-4.6,-2.8)--(4.5,2.9) node[above] {$\Delta$};
+ \vguide{-2.7}{1.95}\vguide{1}{-3.7};\node[left] at (0,1.95) {$2$};\draw[densely dashed] (-2.7,1.95)--(0,1.95);
+ \node[above] at (-1,0) {$-1$};\node[above] at (1,0) {$1$};\node[right] at (2.7,-.1) {$(C)$};}
+\tfbox{Số thực $b=3$.}
+{Số thực $c=9$.}
+{Số thực $d=-20$.}
+{Giá trị biểu thức $b+c+d=-26$.}
+\question[TDM31]{15} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$ như hình vẽ. Nhận xét \textbf{đúng} về giá trị thực của tham số $m$ là gì? Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\figbox{\axes{-4}{4}{-3.5}{4.3}
+ \draw[grblue,thick] plot[smooth] coordinates {(-3.5,3.9) (-1.8,-2) (-1,-1.2) (0,2) (1,0) (2.5,-3.1)};
+ \vguide{-1.8}{-2};\node[above] at (-1.8,0) {$m$};\node[left] at (0,2) {$2$};\node[right] at (0,-2) {$-2$};\node[above] at (1,0) {$1$};\node[right] at (2.5,-3) {$(C)$};}
+\tfbox{$d=2$.}{$c=0$.}{Giá trị nhỏ nhất của hàm số $f(x)$ trên đoạn $[m;1]$ bằng $-2$.}{Giá trị $m=-2$.}
+\question[TDM31]{16} Cho hàm số bậc ba $y=f(x)=ax^3+bx^2+cx+d$ có đồ thị $(C)$. Biết $I(1;2)$ là tâm đối xứng của $(C)$ và $A(-1;18)$ là một điểm cực trị của $(C)$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\tfbox{Điểm cực trị khác của $(C)$ có tọa độ là $(3;-11)$.}
+{$a>0$.}{$b<0$.}{$a+2b+c+3d=25$.}
+\partthree{17}{22}
+\question[TDM31]{17} Biết đồ thị hàm số $y=x^3-6x^2+2x+10$ có tâm đối xứng là $I(a;b)$. Hãy tính giá trị biểu thức $(a+b)$?
+\shortanswer
+\question[TDM31]{18} Biết đồ thị của hàm số $y=f(x)=x^3+bx^2+cx+d$ có một điểm cực trị là $A(1;2)$. Khi đó giá trị biểu thức $T=b+2c+3d$ bằng bao nhiêu?
+\shortanswer
+\question[TDM31]{19} Cho hàm số bậc ba có đồ thị $(C)$ được biểu diễn như hình vẽ bên dưới. Khi đó giá trị của tổng $(a+b)$ bằng bao nhiêu?
+\figbox{\axes{-5.2}{4.7}{-3.3}{3.7}
+ \draw[grblue,thick] plot[smooth] coordinates {(-4.2,-3) (-2.65,2.7) (-1.4,1.6) (0,-1.4) (.65,-2.35) (2.15,-.15) (3,2.7)};
+ \vguide{-2.65}{2.7}\vguide{.65}{-2.35};
+ \node[above] at (-4.0,0) {$-6$};\node[above] at (-2.65,0) {$a$};\node[above] at (-1,0) {$-1$};\node[above] at (.65,0) {$b$};\node[above] at (2,0) {$4$};\node[right] at (3,2.7) {$(C)$};}
+\shortanswer
+\question[TDM32]{20} Cho hàm số $y=(m-1)x^3-(m-3)x-2m+2022$. Gọi $S$ là tập tất cả các giá trị nguyên của tham số $m$ để hàm số đồng biến trên $\mathbb R$. Số phần tử tập $S$ bằng bao nhiêu?
+\shortanswer
+\question[TDM32]{21} Cho hàm số bậc ba $y=x^3-3mx^2+2m$ có đồ thị $(C)$. Gọi điểm cực đại và điểm cực tiểu lần lượt là $A$ và $B$. Để tam giác $OAB$ cân tại $O$ thì giá trị $m^2$ bằng bao nhiêu? (Kết quả lấy một chữ số sau dấu phẩy.)
+\shortanswer
+\question[TDM42]{22} Cho hàm số bậc ba $y=x^3-3(m+1)x^2+(6m^2+12m)x$. Hàm số đạt cực trị tại $x_1$ và $x_2$. Hãy tìm giá trị nhỏ nhất của biểu thức $T=(x_1^2-5)(1-x_2^2)$?
+\shortanswer
+\finishExam
+\clearpage
+\examtitle{TDMXX11}{KHẢO SÁT VÀ VẼ ĐỒ THỊ HÀM PHÂN THỨC}
+\partone{10}
+\question[TDM21]{1} Đồ thị hàm số $y=\dfrac{2x-3}{x+1}$ có tâm đối xứng là
+\fourchoices{$A(1;2)$}{$B(-1;2)$}{$C(-1;-2)$}{$D(-1;3)$}
+\question[TDM31]{2} Đồ thị hàm số $y=\dfrac{2x-3}{x+1}$ có trục đối xứng (không cắt đồ thị) có phương trình là
+\fourchoices{$y=x+3$}{$y=-x+1$}{$y=2x-1$}{$y=x+1$}
+\question[TDM31]{3} Cho hàm số $f(x)=\dfrac{ax+b}{cx+d}$ có đồ thị cho như hình vẽ. Nhận xét đúng khi nói về dấu các hệ số $a,b,c,d$ là:
+\figbox{\axes{-4.2}{4.1}{-3.1}{4.1}
+ \draw[thin] (.45,-3.1)--(.45,4.15);
+ \draw[thin] (-4,-.55)--(4,-.55);
+ \draw[thick] plot[smooth] coordinates {(-4,-.9) (-2,-.62) (-1,-.35) (0,1.2) (.24,3.55)};
+ \draw[thick] plot[smooth] coordinates {(.72,-3) (1.15,-1.75) (2.2,-1.1) (4,-.85)};}
+\twochoices{$\begin{cases}ab>0\\cd>0\end{cases}$}{$\begin{cases}ad>0\\bc<0\end{cases}$}
+{$\begin{cases}ad<0\\bc>0\end{cases}$}{$\begin{cases}ac>0\\bd>0\end{cases}$}
+\question[TDM31]{4} Cho hàm số $f(x)=\dfrac{ax+b}{cx+d}$ có đồ thị cho như hình vẽ. Nhận xét đúng khi nói về dấu các hệ số $a,b,c,d$ là:
+\figbox{\axes{-4.3}{4}{-4}{3.9}
+ \draw[thin] (.45,-3.9)--(.45,3.85);
+ \draw[thin] (-4,-.48)--(3.8,-.48);
+ \draw[thick] plot[smooth] coordinates {(-3.9,-.77) (-2.5,-1.15) (-1.0,-2.1) (-.1,-3.5)};
+ \draw[thick] plot[smooth] coordinates {(.75,3.5) (1.15,1.95) (2.3,.5) (3.8,-.05)};}
+\twochoices{$\begin{cases}ab<0\\cd>0\end{cases}$}{$\begin{cases}ab>0\\cd<0\end{cases}$}
+{$\begin{cases}ad>0\\bc>0\end{cases}$}{$\begin{cases}ac>0\\bd<0\end{cases}$}
+\question[TDM31]{5} Cho hàm số $y=\dfrac{ax+b}{cx+d}$ có đồ thị $(C)$ và nhận điểm $(2;-1)$ làm tâm đối xứng. Đồ thị $(C)$ cắt hai trục tọa độ lần lượt tại $M$ và $N$ sao cho diện tích tam giác $OMN$ bằng $2$. Hàm số đã cho tương ứng là:
+\twochoices{$y=\dfrac{-x+2\sqrt2}{x-2}$}{$y=\dfrac{x-1}{x-2}$}
+{$y=\dfrac{x+2\sqrt2}{x-2}$}{$y=\dfrac{x+2}{-x+2}$}
+\question[TDM31]{6} Cho hàm số $y=f(x)=\dfrac{3x-2}{x-1}$ có đồ thị $(C)$. Hãy tìm tất cả các giá trị thực của tham số $m$ để phương trình $f(x)=2m-1$ vô nghiệm?
+\fourchoices{$(-\infty;1)$}{$m=2$}{$m=\dfrac12$}{$m\in(3;+\infty)$}
+\question[TDM31]{7} Đồ thị hàm số $y=\dfrac{x^2-5x+7}{x-2}$ có tâm đối xứng là
+\fourchoices{$(2;3)$}{$(-2;-5)$}{$(2;-1)$}{$(1;-2)$}
+\question[TDM31]{8} Biết đồ thị hàm số $y=\dfrac{x^2-3x+4}{x-1}$ có trục đối xứng là đường thẳng có phương trình $y=ax+b$, với $a>0$. Giá trị biểu thức $T=a+b$ bằng
+\fourchoices{$2$}{$3$}{$0$}{$-1$}
+\question[TDM31]{9} Hỏi đồ thị hàm số $y=\dfrac{2x+4}{x-1}$ có tất cả bao nhiêu điểm có tọa độ nguyên?
+\fourchoices{$8$}{$9$}{$7$}{$6$}
+\question[TDM31]{10} Hỏi đồ thị hàm số $y=\dfrac{x^2-5x+10}{x-2}$ có tất cả bao nhiêu điểm có tọa độ nguyên?
+\fourchoices{$8$}{$4$}{$2$}{$6$}
+\parttwo{11}{12}
+\question[TDM31]{11} Cho hàm số $y=f(x)=\dfrac{x^2-4x+3}{x-2}$ có đồ thị $(C)$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\tfbox{Đường tiệm cận đứng của $(C)$ là $x=2$ và đường tiệm cận xiên của $(C)$ là $y=x-2$.}
+{Hàm số $f(x)$ có hai điểm cực trị.}
+{Đồ thị $(C)$ có tâm đối xứng là $I(2;0)$.}
+{Một trong hai trục đối xứng của $(C)$ có phương trình là $y=(\sqrt2+1)x-2\sqrt2-2$.}
+\question[TDM32]{12} Cho hàm số $y=\dfrac{2x-11}{x-1}$ có đồ thị $(C)$. Hỏi mệnh đề nào dưới đây là đúng hay sai?
+\tfbox{Tâm đối xứng của $(C)$ là $I(1;2)$.}
+{Đồ thị $(C)$ giao với $Ox$ tại $A$ và giao với $Oy$ tại $B$. Có $AB=6$.}
+{Số điểm có tọa độ nguyên thuộc đồ thị $(C)$ là $8$.}
+{Số parabol giao với $(C)$ tại ba điểm phân biệt có tọa độ nguyên là $20$.}
+\partthree{13}{17}
+\question[TDM31]{13} Cho đồ thị $(C)$: $y=\dfrac{x-3}{x+1}$. Biết rằng có hai điểm phân biệt thuộc đồ thị $(C)$ và cách đều hai trục tọa độ. Giả sử các điểm đó lần lượt là $M$ và $N$. Hãy xác định độ dài đoạn thẳng $MN$ (làm tròn kết quả đến hàng phần trăm)?
+\shortanswer
+\question[TDM32]{14} Cho hàm số $y=\dfrac{x+3}{x-1}$ có đồ thị $(C)$ và đường thẳng $d:y=x-2m$. Để $(C)$ cắt $d$ tại hai điểm $A,B$ phân biệt sao cho $AB=2\sqrt{10}$ thì giá trị $m^2$ bằng bao nhiêu?
+\shortanswer
+\question[TDM32]{15} Cho hàm số $y=\dfrac{2x-1}{x-2}$ có đồ thị $(C)$ và đường thẳng $d:y=x+m$. Để $(C)$ cắt $d$ tại hai điểm phân biệt $A,B$, hỏi độ dài $AB$ ngắn nhất bằng bao nhiêu (làm tròn kết quả đến hàng phần mười)?
+\shortanswer
+\question[TDM32]{16} Cho hàm số $y=\dfrac{x-1}{x+1}$ có đồ thị $(C)$. Biết $(C)$ cắt trục $Ox$ và $Oy$ lần lượt tại hai điểm $A$ và $B$. Gọi $M(a;b)$ là một điểm nằm trên $(C)$ sao cho diện tích tam giác $MAB$ bằng $3$. Hỏi có tất cả bao nhiêu điểm $M$ thỏa mãn bài toán?
+\shortanswer
+\question[TDM32]{17} Cho hàm số $y=f(x)=\dfrac{3x-2}{x+1}$ có đồ thị $(C)$. Hỏi có tất cả bao nhiêu đường thẳng cắt $(C)$ tại hai điểm phân biệt có tọa độ nguyên?
+\shortanswer
+\finishExam
+% Nguon: ba de TDMXX09, TDMXX10, TDMXX11 (Nguyen Dang Ai -- Tu Duy Mo).
+% Ban go LaTeX: BTVN_B5.tex theo phong cach BTVN_01_B1.tex; do thi ve lai TikZ.
+\end{document}
