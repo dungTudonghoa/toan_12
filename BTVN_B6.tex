@@ -1,0 +1,194 @@
+% BTVN_B6.tex — de TDMXX13, co ban ve nguyen ham cua ham so (Phan A).
+% Theo phong cach BTVN_B5.tex; do thi TikZ, khong can tep anh ngoai.
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=15mm,right=15mm,top=14mm,bottom=18mm,footskip=9mm]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T5]{fontenc}\usepackage[utf8]{inputenc}\usepackage{mathptmx}
+\else
+  \usepackage{fontspec}
+  \IfFontExistsTF{Times New Roman}{\setmainfont{Times New Roman}}{%
+    \IfFontExistsTF{Liberation Serif}{\setmainfont{Liberation Serif}}{\setmainfont{Latin Modern Roman}}}
+\fi
+\usepackage{amsmath,amssymb,fix-cm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{tcolorbox,tabularx,fancyhdr,lastpage}
+\definecolor{sectionpurple}{RGB}{155,42,143}
+\definecolor{notebackground}{RGB}{229,240,245}
+\definecolor{noteborder}{RGB}{255,55,55}
+\definecolor{grblue}{RGB}{37,77,194}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\fontsize{8.5}{10}\selectfont Biên soạn: \textbf{Nguyễn Anh Dũng}}
+\fancyfoot[R]{\fontsize{8.5}{10}\selectfont Trang \thepage/\pageref{LastPage} -- BTVN B6}
+\newtcolorbox{notebox}{colback=notebackground,colframe=noteborder,
+ boxrule=.65pt,arc=1.5pt,left=5pt,right=5pt,top=2pt,bottom=2pt,
+ before skip=2pt,after skip=2pt}
+\newcommand{\question}[2][TDM31]{%
+  \par\addvspace{2pt}\noindent\textbf{\textcolor{sectionpurple}{Câu #2:} \textcolor{noteborder}{[#1]}}\enspace}
+\newcommand{\answerlabel}[1]{\textbf{\textcolor{sectionpurple}{#1.}}}
+\newcommand{\fourchoices}[4]{%
+ \par\nobreak\vspace{1pt}\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}lll@{}}
+ \answerlabel{A} #1 & \answerlabel{B} #2 & \answerlabel{C} #3 & \answerlabel{D} #4
+ \end{tabular*}\par}
+\newcommand{\twochoices}[4]{%
+ \par\nobreak\vspace{1pt}\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+ \answerlabel{A} #1 & \answerlabel{B} #2 \\[1pt]
+ \answerlabel{C} #3 & \answerlabel{D} #4
+ \end{tabularx}\par}
+\newcommand{\tfbox}[4]{%
+\begin{notebox}\renewcommand{\arraystretch}{1.17}\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{|>{\bfseries\color{sectionpurple}}c|>{\raggedright\arraybackslash}X|c|c|}
+\hline\multicolumn{2}{|c|}{\textbf{\textcolor{sectionpurple}{Mệnh đề}}}&
+\textbf{\textcolor{sectionpurple}{Đ}}&\textbf{\textcolor{sectionpurple}{S}}\\\hline
+ a & #1 & $\bigcirc$ & $\bigcirc$ \\ \hline
+ b & #2 & $\bigcirc$ & $\bigcirc$ \\ \hline
+ c & #3 & $\bigcirc$ & $\bigcirc$ \\ \hline
+ d & #4 & $\bigcirc$ & $\bigcirc$ \\ \hline
+\end{tabularx}\end{notebox}}
+\newcommand{\shortanswer}{%
+ \par\nobreak\hfill\begin{tikzpicture}[baseline=-.7ex]
+ \node[draw=noteborder,fill=notebackground,line width=.6pt,rounded corners=1pt,
+ minimum width=23mm,minimum height=5mm,inner sep=0pt] {};
+ \end{tikzpicture}\par}
+\newcommand{\examtitle}[2]{%
+ \par\begin{center}\textbf{ĐỀ #1}\\[-1pt]\textbf{#2}\\[-1pt]
+ {\fontsize{10.5}{12}\selectfont\itshape Form đề chuẩn bám sát BGD2026 -- Thời gian làm bài \textbf{90 phút}}\end{center}\vspace{-7pt}}
+\newcommand{\partone}[1]{\par\addvspace{3pt}\textbf{Phần I. Câu trắc nghiệm nhiều phương án lựa chọn.} Thí sinh trả lời từ câu 1 đến câu #1. Mỗi câu chỉ chọn một phương án.\par}
+\newcommand{\parttwo}[2]{\par\addvspace{4pt}\textbf{Phần II. Câu trắc nghiệm đúng sai.} Thí sinh trả lời từ câu #1 đến câu #2, trong mỗi ý a), b), c), d) chọn đúng hoặc sai.\par}
+\newcommand{\partthree}[2]{\par\addvspace{4pt}\textbf{Phần III. Câu trắc nghiệm trả lời ngắn.} Thí sinh trả lời từ câu #1 đến câu #2.\par}
+\newcommand{\finishExam}{\par\vspace{3pt}{\centering\textbf{\textcolor{sectionpurple}{--- Hết ---}}\par}}
+% Hinh ve duoc chuan hoa theo do thi vector goc PDF (TDMXX10) va doi chieu hinh raster goc (TDMXX09, TDMXX11).
+% Hinh TikZ doc lap, khong can tai tep hinh ben ngoai.
+\newcommand{\figbox}[1]{%
+\begin{notebox}\centering
+\begin{tikzpicture}[x=.43cm,y=.43cm,>=Stealth,every node/.style={font=\fontsize{10}{11}\selectfont}]
+ #1
+\end{tikzpicture}\end{notebox}}
+\newcommand{\axes}[4]{%
+ \draw[thin,-{Stealth[length=4pt]}] (#1,0)--(#2,0) node[below] {$x$};
+ \draw[thin,-{Stealth[length=4pt]}] (0,#3)--(0,#4) node[right] {$y$};
+ \node[below left] at (0,0) {$O$};}
+\newcommand{\dotat}[2]{\fill (#1,#2) circle (1.3pt);}
+\newcommand{\vguide}[2]{\draw[thin,densely dashed] (#1,0)--(#1,#2);\dotat{#1}{0}\dotat{#1}{#2}}
+\begin{document}
+\fontsize{11.5}{14}\selectfont
+\examtitle{TDMXX13}{CƠ BẢN VỀ NGUYÊN HÀM CỦA HÀM SỐ -- PHẦN A}
+\partone{12}
+
+\question[TDM21]{1} Hỏi hàm nào dưới đây không phải là một nguyên hàm của hàm số $f(x)=2x-4$?
+\fourchoices{$x^2-4x+1$}{$2x^2-4x$}{$(x-2)^2-4$}{$(x-4)^2+4x$}
+
+\question[TDM21]{2} $F(x)$ là một nguyên hàm của hàm số $f(x)$ trên $K$ nếu
+\twochoices{$F(x)=-f(x)$ với $\forall x\in K$.}{$F(x)=[f(x)]^2$ với $\forall x\in K$.}
+{$f'(x)=F(x)$ với $\forall x\in K$.}{$F'(x)=f(x)$ với $\forall x\in K$.}
+
+\question[TDM21]{3} Chọn phát biểu sai:
+\twochoices{$\displaystyle\int\!\bigl(f(x)+g(x)\bigr)\,dx=\int f(x)\,dx+\int g(x)\,dx$.}
+{$\displaystyle\int\!\bigl(f(x)-g(x)\bigr)\,dx=\int f(x)\,dx-\int g(x)\,dx$.}
+{$\displaystyle\int dx=x+C$.}
+{$\displaystyle\int k\,f(x)\,dx=k\int f(x)\,dx$ với $\forall k\in\mathbb R$.}
+
+\question[TDM21]{4} Họ nguyên hàm của hàm số $f(x)=3x^2-4+\dfrac{1}{x}$ tương ứng là:
+\twochoices{$x^3-4x-\dfrac{1}{x^2}+C$}{$3x^3-4x+\ln|x|+C$}
+{$x^3-4x+\ln|x|+C$}{$x^3-4+\ln|x|+C$}
+
+\question[TDM21]{5} Họ nguyên hàm của hàm số $f(x)=2\sin x-3$ tương ứng là:
+\fourchoices{$-2\cos x-3x+C$}{$2\cos x-3x+C$}{$-2\cos x+3x+C$}{$2\cos x-3+C$}
+
+\question[TDM21]{6} Họ nguyên hàm của hàm số $f(x)=3\cos x-\dfrac{1}{\cos^2x}$ tương ứng là:
+\fourchoices{$3\sin x+\tan x+C$}{$3\sin x-\tan x+C$}{$-3\sin x-\tan x+C$}{$3\sin x+\cot x+C$}
+
+\question[TDM21]{7} Họ nguyên hàm của hàm số $f(x)=\dfrac{2}{\sin^2x}-x^5$ tương ứng là:
+\fourchoices{$-2\cot x-\dfrac{x^6}{6}+C$}{$\cot x-\dfrac{x^6}{6}+C$}{$-\cot x-x^6+C$}{$2\tan x-\dfrac{x^6}{6}+C$}
+
+\question[TDM21]{8} Họ nguyên hàm của hàm số $f(x)=\dfrac{1}{\sqrt{x}}$ tương ứng là:
+\fourchoices{$\sqrt{x}+C$}{$2x\sqrt{x}+C$}{$x^{\frac12}+C$}{$2\sqrt{x}+C$}
+
+\question[TDM21]{9} Hãy tính $\displaystyle\int\!\left(\sin x-\dfrac{2}{x}\right)\,dx$?
+\twochoices{$\cos x-2\ln|x|+C$}{$-\cos x-\ln|x|+C$}
+{$-\cos x-2\ln|x|+C$}{$-\cos x-2\ln x+C$}
+
+\question[TDM21]{10} Hãy tính $\displaystyle\int\!\bigl(e^x+2^{x+1}\bigr)\,dx$?
+\twochoices{$e^x+2^{x+1}+C$}{$e^x+\dfrac{2^{x+1}}{\ln2}+C$}
+{$e^x-2^x+C$}{$e^x+2^x+C$}
+
+\question[TDM31]{11} Hãy tính $\displaystyle\int\!\bigl(x^2+1\bigr)\bigl(x^3+x\bigr)\,dx$?
+\twochoices{$F(x)=\dfrac{x^6}{6}+\dfrac{x^4}{4}+\dfrac{x^2}{2}+C$}
+{$F(x)=\dfrac{x^6}{3}-\dfrac{x^4}{4}+\dfrac{x^2}{2}+C$}
+{$F(x)=\dfrac{x^6}{6}+\dfrac{x^4}{2}+\dfrac{x^2}{2}+C$}
+{$F(x)=\dfrac{x^6}{3}+\dfrac{x^3}{3}+\dfrac{x^2}{4}+C$}
+
+\question[TDM31]{12} Hãy tính $\displaystyle\int\!\dfrac{(x^3+1)^2}{x^4}\,dx$?
+\twochoices{$F(x)=\dfrac{x^3}{6}+2\ln|x|-\dfrac{1}{3x^3}+C$}
+{$F(x)=\dfrac{x^3}{4}+2\ln|x|-\dfrac{1}{x^3}+C$}
+{$F(x)=\dfrac{x^3}{3}+2\ln|x|+\dfrac{1}{3x^3}+C$}
+{$F(x)=\dfrac{x^3}{3}+2\ln|x|-\dfrac{1}{3x^3}+C$}
+
+\parttwo{13}{16}
+\question[TDM32]{13} Từ độ cao $20\,\mathrm{m}$ một quả bóng được ném thẳng đứng lên trên với vận tốc được tính bởi công thức $v=-10t+20$ ($\mathrm{m/s}$).\par
+Hỏi trong các mệnh đề dưới đây, mệnh đề nào là \textbf{đúng}, mệnh đề nào là \textbf{sai}?
+\tfbox{Ở thời điểm ban đầu vật có vận tốc là $20\,\mathrm{m/s}$.}
+{Độ cao của vật ở thời điểm $t$ là $s(t)=-5t^2+20t+20$ ($\mathrm{m}$).}
+{Ở thời điểm vật có vận tốc là $-20\,\mathrm{m/s}$ thì nó có độ cao là $20\,\mathrm{m}$.}
+{Ở thời điểm $t_2=5$ giây thì vật chạm đất.}
+
+\question[TDM32]{14} Cho $F(x)$ và $2F(x)-x^2$ là nguyên hàm của hàm số $f(x)$. Biết rằng $F(1)=5$.\par
+Hỏi trong các mệnh đề dưới đây, mệnh đề nào là \textbf{đúng}, mệnh đề nào là \textbf{sai}?
+\tfbox{$f(x)=F'(x)$.}
+{$f(x)=2F'(x)-2x$.}
+{$f(x)=4x^2$.}
+{$F(2)=8$.}
+
+\question[TDM32]{15} Biết tốc độ thay đổi lượng khách tham dự một cuộc triển lãm được biểu diễn bằng hàm số $B'(t)=at+b$ (khách/giờ). Trong đó $t$ tính bằng giờ, bắt đầu mở cửa thì coi như đã có $200$ khách đứng đợi sẵn và tham dự luôn, sau khi mở cửa được $8$ giờ thì lượng khách là đông nhất, sau đúng $20$ giờ thì cuộc triển lãm kết thúc và không còn khách nào.\par
+Hỏi trong các mệnh đề dưới đây, mệnh đề nào là \textbf{đúng}, mệnh đề nào là \textbf{sai}?
+\tfbox{Số lượng khách ban đầu là $B(0)=200$.}
+{Số lượng khách ở thời điểm $t$ là $B(t)=-5t^2+40t+200$ (khách).}
+{Số lượng khách tham gia đông nhất là $360$ khách. (Số khách có mặt ở một thời điểm)}
+{Nếu trong $4$ giờ đầu có $300$ lượt khách ra về thì tổng số lượt khách tham dự trong $4$ giờ đầu là $620$ (khách).}
+
+\question[TDM31]{16} Cho hàm số $f(x)$ có đạo hàm xác định trên toàn $\mathbb R$. Biết $(x^2-x)$ là một nguyên hàm của hàm số $f(x)e^x$. Hỏi trong các mệnh đề dưới đây, mệnh đề nào là \textbf{đúng}, mệnh đề nào là \textbf{sai}?
+\tfbox{$f(x)=(2x-1)e^{-x}$.}
+{$f'(x)=e^x(2x-3)$.}
+{$\displaystyle\int f'(x)e^x\,dx=-x^2+3x+C,\ C\in\mathbb R$.}
+{Gọi $F(x)$ là một nguyên hàm của $\dfrac{[f'(x)e^x]^2}{x}$, có $F(1)=0$. Khi đó $F(2)=24$.}
+
+\clearpage
+\partthree{17}{22}
+\question[TDM31]{17} Cho hàm số $F(x)$ là một nguyên hàm của hàm số $f(x)=3x^2-1$. Biết rằng $F(0)=2$. Hãy tính $F(2)$?
+\shortanswer
+
+\question[TDM32]{18} Cho $\displaystyle\int\!\bigl(a\cos x+b\sin x\bigr)\,dx=(2a+3)\cos x+4\sin x+C$. Hãy tính giá trị $T=3a+b$?
+\shortanswer
+
+\question[TDM32]{19} Cho hàm số $f(x)$ là một nguyên hàm của hàm số $g(x)=6x-2$. Hàm số $F(x)$ là một nguyên hàm của hàm số $f(x)$. Biết $f(0)=F(1)$ và $f(1)=F(0)$. Hãy tính $T=f(3)-F(3)$?
+\shortanswer
+
+\question[TDM32]{20} Biết rằng $F(x)+2x$ là một nguyên hàm của $f(x)$ và $F(x)-3x^2$ là một nguyên hàm của hàm số $2f(x)-x$. Giá trị của $f(1)$ bằng
+\shortanswer
+
+\question[TDM32]{21} Biết rằng $F(x)$ là một nguyên hàm của hàm số $f(x)=3x^2-6x+c$. Biết rằng hai điểm cực trị của đồ thị hàm số $y=F(x)$ nằm trên các trục tọa độ. Hãy tính giá trị $F(3)$?
+\shortanswer
+
+\question[TDM32]{22} Cho hàm số bậc hai $y=f(x)$ có đồ thị như hình vẽ bên dưới. Biết rằng $F(x)$ là một nguyên hàm của hàm số $f(x)$ và giá trị cực tiểu của hàm số $F(x)$ bằng giá trị cực đại của hàm số $xf(x)$. Hãy tính giá trị của $F(3)$ (làm tròn đến hàng phần mười)?
+\figbox{\begin{scope}[x=1.35cm,y=.63cm]
+\draw[thin,-{Stealth[length=4pt]}] (-2.25,0)--(2.35,0) node[below] {$x$};
+\draw[thin,-{Stealth[length=4pt]}] (0,-3.6)--(0,6.2) node[right] {$y$};
+\draw[grblue,thick,domain=-1.65:1.65,samples=80,smooth] plot (\x,{3*\x*\x-3});
+\dotat{-1}{0}\dotat{1}{0}\dotat{0}{-3}\dotat{0}{0}
+\node[below] at (-1,0) {$-1$};
+\node[below] at (1,0) {$1$};
+\node[below right] at (0,0) {$O$};
+\node[right] at (0,-3) {$-3$};
+\node[right] at (1.63,5) {$f(x)$};
+\end{scope}}
+\shortanswer
+\finishExam
+
+% Nguon: DE TDMXX13_DTL_CO BAN VE NGUYEN HAM CUA HAM SO_PHAN A.pdf (4 trang).
+% Ban LaTeX: BTVN_B6.tex theo phong cach BTVN_B5.tex; do thi TikZ.
+\end{document}
